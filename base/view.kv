@@ -1,0 +1,27 @@
+ScreenManager:
+    id: screen_manager
+    MainScreen:
+        id: main_screen
+        name: 'Main'
+        manager: screen_manager
+    ServiceScreen:
+        id: service_screen
+        name: 'Service'
+        manager: screen_manager
+
+<MainScreen>:
+    BoxLayout:
+        background_color: (.61, .87, .95, 1)
+        padding: 100
+        id: screen1
+        orientation: 'vertical'
+        Button:
+            text: 'Начать'
+            on_press: app.show_main_screen()
+
+<ServiceScreen>:
+    BoxLayout:
+        background_color: (.61, .87, .95, 1)
+        padding: 100
+        id: screen2
+        orientation: 'vertical'
