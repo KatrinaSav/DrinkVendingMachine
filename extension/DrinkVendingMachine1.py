@@ -1,4 +1,3 @@
-from extension.Storage import Storage
 from extension.CoinReceiver import CoinReceiver
 from extension.BillReceiver import BillReceiver
 from base.DrinkVendingMachine import DrinksVendingMachine
@@ -10,13 +9,10 @@ from kivy.uix.label import Label
 
 class DrinkVendingMachine1(DrinksVendingMachine):
 
-    storage: Storage
     coin_receiver: CoinReceiver
 
-    def __init__(self, receiver: BillReceiver, balance: Balance1, coin_receiver: CoinReceiver,
-                 storage: Storage, **kwargs):
+    def __init__(self, receiver: BillReceiver, balance: Balance1, coin_receiver: CoinReceiver, **kwargs):
         super().__init__(receiver, balance, **kwargs)
-        self.storage = storage
         self.coin_receiver = coin_receiver
 
     def show_main_screen(self):
@@ -37,11 +33,11 @@ class DrinkVendingMachine1(DrinksVendingMachine):
         box.add_widget(Button(text="Очистить хранилище", on_press=self.on_take_accumulated_money))
 
     def on_take_accumulated_money(self, instance):
-        self.storage.clear()
-        self.balance.reset()
+        self.receiver.storage.clear()
+        self.__give_money()
 
     def on_take_change(self, instance):
-        self.storage.define_change(self.balance.deposited_money)
+        self.receiver.storage.define_change(self.balance.deposited_money)
         self.__give_money()
         self.balance.reset()
         self.show_main_screen()

@@ -9,11 +9,11 @@ from extension.CoinReceiver import CoinReceiver
 class Application1(Application):
 
     def build(self):
-        bill_receiver = BillReceiver()
-        coin_receiver = CoinReceiver()
         storage = Storage()
+        bill_receiver = BillReceiver(storage)
+        coin_receiver = CoinReceiver(storage)
         balance = Balance1()
-        machine = DrinkVendingMachine1(bill_receiver, balance, coin_receiver, storage)
+        machine = DrinkVendingMachine1(bill_receiver, balance, coin_receiver)
         bill_receiver.set_machine(machine)
         coin_receiver.set_machine(machine)
         return machine

@@ -1,13 +1,20 @@
 from base.Receiver import Receiver
 from extension.AllValues import CoinsValue
+from extension.Storage import Storage
 
 
 class CoinReceiver(Receiver):
+
+    storage: Storage
+
+    def __init__(self, storage: Storage):
+        self.storage = storage
+
     def process_input(self, instance):
         if self.__coin_authenticity_check():
             value = self.__define_coin_value(instance)
             self.machine.balance.add_money(value.value)
-            self.machine.storage.add_money(value)
+            self.storage.add_money(value)
             self.machine.show_main_screen()
         else:
             self.__return_coin()
